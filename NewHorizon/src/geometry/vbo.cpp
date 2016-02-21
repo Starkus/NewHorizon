@@ -9,6 +9,8 @@
 
 #include "vbo.hpp"
 
+#include <stdio.h>
+
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
 
@@ -124,6 +126,10 @@ void VBO::draw(GLuint program) {
 
 		vec3 spe = mat.colSpec;
 		glUniform4f(uSpec, spe.r, spe.g, spe.b, mat.specInt);
+
+		if (mat.texDiff != NULL_TEXTURE)
+			glBindTexture(GL_TEXTURE_2D, mat.texDiff);
+
 
 		GLuint end = material_indices[m];
 		glDrawElements(GL_TRIANGLES, end, GL_UNSIGNED_INT, BUFFER_OFFSET(0));

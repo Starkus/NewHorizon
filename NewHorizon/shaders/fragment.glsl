@@ -3,7 +3,7 @@
 out vec4 color;
 
 // Textures
-uniform sampler2D tex;
+uniform sampler2D texDiff;
 
 uniform vec4 lightPos;
 uniform vec4 lightDiff;
@@ -47,5 +47,5 @@ vec4 specular() {
 void main() {
 
 	color = diffuse() + specular();
-	color = vec4(texture2D(tex, vUv));
+	color = vec4(mix(diffuse(), vec4(texture2D(texDiff, vUv)), 1.0).rgb, texture2D(texDiff, vUv).a);
 }

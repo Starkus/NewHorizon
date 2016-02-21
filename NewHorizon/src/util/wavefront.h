@@ -8,6 +8,10 @@
 #ifndef UTIL_WAVEFRONT_H_
 #define UTIL_WAVEFRONT_H_
 
+#include <windows.h>
+#include <GL/glew.h>
+#include <GL/glut.h>
+
 #include <fstream>
 #include <stdlib.h>
 #include <map>

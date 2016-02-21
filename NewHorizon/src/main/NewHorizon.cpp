@@ -89,8 +89,8 @@ void init() {
 	vbo.generate();
 
 	int w, h;
-	//test_texture = findOrReg((char*) "textures/vinyls.png");
-	test_texture = PNG_load((const char*) "textures/vinyls.png", &w, &h);
+	test_texture = texture_bank.findOrReg((char*) "textures/350z/vinyls.png");
+	//test_texture = PNG_load((const char*) "textures/vinyls.png", &w, &h);
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, test_texture);
@@ -98,7 +98,7 @@ void init() {
 	programID = loadShaders("shaders/vertex.glsl", "shaders/fragment.glsl");
 	glUseProgram(programID);
 
-	uTex = glGetUniformLocation(programID, "tex");
+	uTex = glGetUniformLocation(programID, "texDiff");
 	glUniform1i(uTex, 0);
 
 	uProjection = glGetUniformLocation(programID, "projection");
@@ -113,6 +113,9 @@ void init() {
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_ALPHA_TEST);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
 	glEnable(GL_DEPTH_TEST);

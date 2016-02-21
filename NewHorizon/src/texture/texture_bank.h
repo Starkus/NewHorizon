@@ -15,9 +15,27 @@
 #include "texture.h"
 
 
-static std::map<std::string, texture> _textures;
+typedef std::map<std::string, texture> texmap;
+//static texmap _textures;
 
-GLuint findOrReg(char* filename);
+//GLuint findOrReg(char* filename);
+
+
+class TextureBank {
+public:
+	GLuint findOrReg(char* filename);
+
+	TextureBank();
+
+private:
+	texmap _textures;
+
+	GLuint find(char* filename);
+	GLuint reg(char* filename);
+};
+
+
+static TextureBank texture_bank;
 
 
 #endif /* UTIL_TEXTURE_BANK_H_ */

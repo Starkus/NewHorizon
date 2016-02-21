@@ -22,6 +22,7 @@ struct texture {
 	int width, height;
 	std::string name;
 
+	texture();
 	texture(const char* filename);
 };
 

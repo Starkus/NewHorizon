@@ -12,24 +12,24 @@
 /*	Copies from the original char array from the last
  *  '/' on up to null character, into target pointer.
  */
-void removeLocation(const char* filename, char* target)
-{
-	int namei = 0;
-	int ssize = 0;
-
-	for (int i = 0; filename[i] != 0; ++i)
-	{
-		++ssize;
-
-		/* Each '/' overrides the last one, so the last
-		 * one's index is in namei at the end of loop.
-		 */
-		if (filename[i] == '\\' || filename[i] == '/')
-			namei = i + 1;
-	}
-
-	memcpy(target, filename + namei, ssize - namei);
-}
+//void removeLocation(const char* filename, char* target)
+//{
+//	int namei = 0;
+//	int ssize = 0;
+//
+//	for (int i = 0; filename[i] != 0; ++i)
+//	{
+//		++ssize;
+//
+//		/* Each '/' overrides the last one, so the last
+//		 * one's index is in namei at the end of loop.
+//		 */
+//		if (filename[i] == '\\' || filename[i] == '/')
+//			namei = i + 1;
+//	}
+//
+//	memcpy(target, filename + namei, ssize - namei);
+//}
 
 
 /*	Initializator loads the PNG, gets the name from
@@ -42,4 +42,13 @@ texture::texture(const char* filename)
 
 	//removeLocation(filename, name);
 	name = filename;
+}
+
+texture::texture()
+{
+	// Dunno why but I need this.
+
+	id = 1;
+	name = "Dummy";
+	height = width = -1;
 }

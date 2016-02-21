@@ -16,6 +16,7 @@
 
 #include "geometry.h"
 #include "mesh.h"
+#include "../texture/texture.h"
 
 using namespace std;
 

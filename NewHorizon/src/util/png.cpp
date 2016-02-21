@@ -76,7 +76,8 @@ GLuint PNG_load(const char* filename, int* width, int* height) {
 		color_type == PNG_COLOR_TYPE_GRAY ||
 		color_type == PNG_COLOR_TYPE_PALETTE)
 
-		png_set_filter(png, 0xFF, PNG_FILLER_AFTER);
+		//png_set_filter(png, 0xFF, PNG_FILLER_AFTER); THIS IS WRONG! Damn you random internet person that helped me for free!
+		png_set_add_alpha(png, 0xff, PNG_FILLER_AFTER);
 
 	if (color_type == PNG_COLOR_TYPE_GRAY ||
 		color_type == PNG_COLOR_TYPE_GRAY_ALPHA)

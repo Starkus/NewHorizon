@@ -188,6 +188,15 @@ int loadMtl(const char* filename, Mesh* mesh, map<string, unsigned short>* matIn
 				}
 			}
 
+			else if onInstruction(MAP_DIFF) {
+
+				if ((state & PARAM_BITS) == FIRST_PAR) {
+
+					current->texDiff = texture_bank.findOrReg((char*) line.c_str());
+					state = 0;
+				}
+			}
+
 			if ((state & PARAM_BITS) == INSTRUCTION)
 				state = (state & FUNC_BITS) | FIRST_PAR;
 

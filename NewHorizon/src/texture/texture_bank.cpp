@@ -10,9 +10,19 @@
 
 #include "texture_bank.h"
 
+#include <stdio.h>
 
-static GLuint registerTex(char *filename)
+
+
+TextureBank::TextureBank()
 {
+}
+
+GLuint TextureBank::reg(char *filename)
+{
+
+	printf("Tryna register: %s\n", filename);
+
 	texture tex(filename);
 
 	//char name[32];
@@ -21,29 +31,32 @@ static GLuint registerTex(char *filename)
 
 
 	std::string name = filename;
-	_textures.at(name) = tex;
+	_textures[name] = tex;
+
+	printf("Texture registered: %s\n", name.c_str());
 
 	return tex.id;
 }
 
-static GLuint findTex(std::string name)
+GLuint TextureBank::find(char* filename)
 {
-	std::map<std::string, texture>::iterator iter = _textures.find(name);
+	printf ("Looking for: %s\n", filename);
+	std::string str = filename;
+	std::map<std::string, texture>::iterator iter = _textures.find(str);
 
 	if (iter != _textures.end())
 		return iter->second.id;
 
-	else return -1;
+	else return NULL_TEXTURE;
 }
 
-GLuint findOrReg(char* filename)
+GLuint TextureBank::findOrReg(char* filename)
 {
-	std::string name = filename;
-
-	GLuint found = findTex(name);
+	GLuint found = find(filename);
 
 	if (found == NULL_TEXTURE)
-		return registerTex(filename);
+		return reg(filename);
 
+	printf ("Texture found: %s\n", filename);
 	return found;
 }
